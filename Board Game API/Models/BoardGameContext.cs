@@ -1,5 +1,4 @@
 ﻿using Board_Game_API.Models;
-using Board_Game_API.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -14,30 +13,30 @@ namespace Board_Game_API.Models {
         public DbSet PlayParticipants { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder) {
             // User
-            modelBuilder.Entity<UserSummaryDTO>()
+            modelBuilder.Entity<User>()
                 .HasKey(u => u.UserID);
-            modelBuilder.Entity<UserSummaryDTO>()
+            modelBuilder.Entity<User>()
                 .Property(u => u.Username)
                 .IsRequired()
                 .HasMaxLength(50);
-            modelBuilder.Entity<UserSummaryDTO>()
+            modelBuilder.Entity<User>()
                 .Property(u => u.FirstName)
                 .IsRequired()
                 .HasMaxLength(50);
-            modelBuilder.Entity<UserSummaryDTO>()
+            modelBuilder.Entity<User>()
                 .Property(u => u.LastName)
                 .IsRequired()
                 .HasMaxLength(50);
-            modelBuilder.Entity<UserSummaryDTO>()
+            modelBuilder.Entity<User>()
                 .Property(u => u.Email)
                 .IsRequired()
                 .HasMaxLength(255);
-            modelBuilder.Entity<UserSummaryDTO>()
+            modelBuilder.Entity<User>()
                 .HasOne(u => u.Collection)
                 .WithOne(c => c.User)
-                .HasForeignKey<UserSummaryDTO>(u => u.CollectionID)
+                .HasForeignKey<User>(u => u.CollectionID)
                 .OnDelete(DeleteBehavior.Cascade);
-            modelBuilder.Entity<UserSummaryDTO>()
+            modelBuilder.Entity<User>()
                 .HasIndex(u => u.CollectionID)
                 .IsUnique();
 
