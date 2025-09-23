@@ -3,7 +3,5 @@
 
         public int GameID { get; set; }
         public int Winner { get; set; }
-
-        
     }
 }
