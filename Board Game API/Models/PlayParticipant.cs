@@ -8,7 +8,7 @@ namespace Board_Game_API.Models {
         public int ParticipantID { get; set; }
 
         [Required]
-        [ForeignKey("PlaySession")]
+        [ForeignKey("Session")]
         public int SessionID { get; set; }
 
         [Required]
@@ -18,7 +18,7 @@ namespace Board_Game_API.Models {
         public int? Score { get; set; }
         public bool IsWinner { get; set; }
 
-        public virtual PlaySession PlaySession { get; set; }
+        public virtual Session Session { get; set; }
         public virtual User User { get; set; }
     }
 }

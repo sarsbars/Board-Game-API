@@ -24,5 +24,6 @@ namespace Board_Game_API.Models {
 
         public virtual Game Game { get; set; }
         public virtual User Winner { get; set; }
-        public virtual ICollection<PlayParticipant> PlayParticipants { get; set; } = new List<PlayParticipant>()
+        public virtual ICollection<PlayParticipant> PlayParticipants { get; set; } = new List<PlayParticipant>();
+    }
 }
