@@ -1,16 +1,18 @@
 ﻿using Board_Game_API.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
-using System.Data.Entity;
+
 
 namespace Board_Game_API.Models { 
-    public class BoardGameContext : Microsoft.EntityFrameworkCore.DbContext { 
-        public DbSet Users { get; set; } 
-        public DbSet Collections { get; set; } 
-        public DbSet CollectionGames { get; set; } 
-        public DbSet Games { get; set; } 
-        public DbSet Sessions { get; set; } 
-        public DbSet PlayParticipants { get; set; }
+
+    public class BoardGameContext : DbContext {
+        public BoardGameContext(DbContextOptions<BoardGameContext> options) : base(options) { }
+        public DbSet<User> Users { get; set; } 
+        public DbSet<Collection> Collections { get; set; } 
+        public DbSet<CollectionGame> CollectionGames { get; set; } 
+        public DbSet<Game> Games { get; set; } 
+        public DbSet<Session> Sessions { get; set; } 
+        public DbSet<PlayParticipant> PlayParticipants { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder) {
             // User
             modelBuilder.Entity<User>()
