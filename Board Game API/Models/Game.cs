@@ -28,6 +28,9 @@ namespace Board_Game_API.Models {
         public bool IsCardGame { get; set; }
         public int? AgeMinimum { get; set; }
 
+        [Required]
+        public Genre GameGenre { get; set; }
+
         [Range(1, 5)]
         public int? Complexity { get; set; }
 
