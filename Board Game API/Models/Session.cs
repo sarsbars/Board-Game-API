@@ -11,17 +11,18 @@ namespace Board_Game_API.Models {
         [ForeignKey("Game")]
         public int GameID { get; set; }
 
+        [Required]
         public DateTime PlayDate { get; set; }
-        public int LengthOfTime { get; set; }
+
+        public int? LengthOfTime { get; set; }
+
+        [StringLength(1000)]
         public string Summary { get; set; }
 
+        [ForeignKey("Winner")]
+        public int? WinnerID { get; set; }
+
         public virtual Game Game { get; set; }
-
-        public User Winner { get; set; }
-
-        public virtual ICollection<Collection> Collection { get; set; } = new List<Collection>();
-        public virtual ICollection<PlayParticipants> PlayParticpants { get; set; } = new List<PlayParticipants>();
-
-
-    }
+        public virtual User Winner { get; set; }
+        public virtual ICollection<PlayParticipant> PlayParticipants { get; set; } = new List<PlayParticipant>()
 }
