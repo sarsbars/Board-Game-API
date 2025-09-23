@@ -11,7 +11,7 @@ namespace Board_Game_API.Models {
         [Required]
         public int UserID { get; set; }
 
-        public virtual User User { get; set; }
+        public virtual UserSummaryDTO User { get; set; }
         public virtual ICollection<CollectionGame> CollectionGames { get; set; } = new List<CollectionGame>();
     }
 }

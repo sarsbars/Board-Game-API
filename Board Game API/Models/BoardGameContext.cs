@@ -14,30 +14,30 @@ namespace Board_Game_API.Models {
         public DbSet PlayParticipants { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder) {
             // User
-            modelBuilder.Entity<User>()
+            modelBuilder.Entity<UserSummaryDTO>()
                 .HasKey(u => u.UserID);
-            modelBuilder.Entity<User>()
+            modelBuilder.Entity<UserSummaryDTO>()
                 .Property(u => u.Username)
                 .IsRequired()
                 .HasMaxLength(50);
-            modelBuilder.Entity<User>()
+            modelBuilder.Entity<UserSummaryDTO>()
                 .Property(u => u.FirstName)
                 .IsRequired()
                 .HasMaxLength(50);
-            modelBuilder.Entity<User>()
+            modelBuilder.Entity<UserSummaryDTO>()
                 .Property(u => u.LastName)
                 .IsRequired()
                 .HasMaxLength(50);
-            modelBuilder.Entity<User>()
+            modelBuilder.Entity<UserSummaryDTO>()
                 .Property(u => u.Email)
                 .IsRequired()
                 .HasMaxLength(255);
-            modelBuilder.Entity<User>()
+            modelBuilder.Entity<UserSummaryDTO>()
                 .HasOne(u => u.Collection)
                 .WithOne(c => c.User)
-                .HasForeignKey<User>(u => u.CollectionID)
+                .HasForeignKey<UserSummaryDTO>(u => u.CollectionID)
                 .OnDelete(DeleteBehavior.Cascade);
-            modelBuilder.Entity<User>()
+            modelBuilder.Entity<UserSummaryDTO>()
                 .HasIndex(u => u.CollectionID)
                 .IsUnique();
 

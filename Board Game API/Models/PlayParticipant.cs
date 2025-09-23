@@ -19,6 +19,6 @@ namespace Board_Game_API.Models {
         public bool IsWinner { get; set; }
 
         public virtual Session Session { get; set; }
-        public virtual User User { get; set; }
+        public virtual UserSummaryDTO User { get; set; }
     }
 }

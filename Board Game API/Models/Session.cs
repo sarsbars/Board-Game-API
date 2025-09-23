@@ -23,7 +23,7 @@ namespace Board_Game_API.Models {
         public int? WinnerID { get; set; }
 
         public virtual Game Game { get; set; }
-        public virtual User Winner { get; set; }
+        public virtual UserSummaryDTO Winner { get; set; }
         public virtual ICollection<PlayParticipant> PlayParticipants { get; set; } = new List<PlayParticipant>();
     }
 }
