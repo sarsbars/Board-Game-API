@@ -7,31 +7,24 @@ namespace Board_Game_API.Models {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int GameID { get; set; }
+
         [Required]
+        [StringLength(50)]
         public string GameName { get; set; }
+
         public int MinPlayers { get; set; }
         public int MaxPlayers { get; set; }
-        public bool IsCompetive { get; set; }
+
+        public bool IsCompetitive { get; set; }
         public bool IsCardGame { get; set; }
-        public int AgeMinimum { get; set; }
-        public enum Genre {
-            Strategy,
-            Family,
-            Party,
-            Abstract,
-            DeckBuilding,
-            Eurogame
-        }
+        public int? AgeMinimum { get; set; }
 
-        public int Complexity { get; set; }
+        public GameGenre Genre { get; set; }
 
-        public int AverageSession { get; set; }
+        [Range(1, 5)]
+        public int? Complexity { get; set; }
 
-        public ICollection<Collection> Collection { get; set; } = new List<Collection>();
-        public virtual ICollection<Session> PlaySession { get; set; } = new List<Session>();
+        public int? AverageSession { get; set; }
 
-    }
-}
-
-
-
+        public virtual ICollection<CollectionGame> CollectionGames { get; set; } = new List<CollectionGame>();
+        public virtual ICo
