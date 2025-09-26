@@ -121,7 +121,7 @@ namespace Board_Game_API.Models {
                 .HasOne(p => p.User)
                 .WithMany(u => u.PlayParticipants)
                 .HasForeignKey(p => p.UserID)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.Cascade);
 
             // Seed Users
             modelBuilder.Entity<User>().HasData(

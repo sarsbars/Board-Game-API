@@ -51,8 +51,8 @@ namespace Board_Game_API.Controllers {
         }
 
         //Add CollectionGame
-        [HttpPost]
-        public async Task<ActionResult<CreateCollectionGameDTO>> AddCollectionGame (CreateCollectionGameDTO cgDTO) {
+        [HttpPost("CollectionGame")]
+        public async Task<ActionResult<CollectionGameDTO>> AddCollectionGame (CollectionGameDTO cgDTO) {
             if (!ModelState.IsValid) {
                 return BadRequest(ModelState);
             }
@@ -67,10 +67,9 @@ namespace Board_Game_API.Controllers {
             _context.CollectionGames.Add(collectionGame);
             await _context.SaveChangesAsync();
 
-            var createdCollectionGameDTO = _mapper.Map<CreateCollectionGameDTO>(collectionGame);
+            var createdCollectionGameDTO = _mapper.Map<CollectionGameDTO>(collectionGame);
             return CreatedAtAction(nameof(GetCollectionGame), new { collectionGameId = collectionGame.CollectionGameID }, createdCollectionGameDTO);
         }
-
 
         //Delete Collection
         [HttpDelete("{id}")]
