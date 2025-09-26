@@ -38,7 +38,7 @@ namespace Board_Game_API.Migrations
                     b.HasIndex("UserID")
                         .IsUnique();
 
-                    b.ToTable("Collections");
+                    b.ToTable("Collections", (string)null);
 
                     b.HasData(
                         new
@@ -140,7 +140,7 @@ namespace Board_Game_API.Migrations
 
                     b.HasIndex("GameID");
 
-                    b.ToTable("CollectionGames");
+                    b.ToTable("CollectionGames", (string)null);
 
                     b.HasData(
                         new
@@ -562,7 +562,7 @@ namespace Board_Game_API.Migrations
 
                     b.HasKey("GameID");
 
-                    b.ToTable("Games");
+                    b.ToTable("Games", (string)null);
 
                     b.HasData(
                         new
@@ -1100,7 +1100,7 @@ namespace Board_Game_API.Migrations
 
                     b.HasIndex("UserID");
 
-                    b.ToTable("PlayParticipants");
+                    b.ToTable("PlayParticipants", (string)null);
 
                     b.HasData(
                         new
@@ -2152,7 +2152,7 @@ namespace Board_Game_API.Migrations
 
                     b.HasIndex("WinnerID");
 
-                    b.ToTable("Sessions");
+                    b.ToTable("Sessions", (string)null);
 
                     b.HasData(
                         new
@@ -2575,7 +2575,7 @@ namespace Board_Game_API.Migrations
                         .IsUnique()
                         .HasFilter("[CollectionID] IS NOT NULL");
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", (string)null);
 
                     b.HasData(
                         new

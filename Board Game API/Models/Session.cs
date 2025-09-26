@@ -17,7 +17,7 @@ namespace Board_Game_API.Models {
         public int? LengthOfTime { get; set; }
 
         [StringLength(1000)]
-        public string Summary { get; set; }
+        public string? Summary { get; set; }
 
         [ForeignKey("Winner")]
         public int? WinnerID { get; set; }
