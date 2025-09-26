@@ -8,7 +8,7 @@ namespace Board_Game_API.Profiles {
         public CollectionGameProfile() {
 
             CreateMap<CollectionGame, CollectionGameDTO>().ReverseMap();
-
+            CreateMap<CollectionGame, CreateCollectionGameDTO>().ReverseMap();
         }
     }
 }
