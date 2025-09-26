@@ -9,17 +9,6 @@ namespace Board_Game_API
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add Mapping Profiles
-
-            builder.Services.AddAutoMapper(typeof(GameProfile));
-            builder.Services.AddAutoMapper(typeof(CollectionGameProfile));
-            builder.Services.AddAutoMapper(typeof(CollectionProfile));
-            builder.Services.AddAutoMapper(typeof(GameSummaryProfile));
-            builder.Services.AddAutoMapper(typeof(PlayParticipantProfile));
-            builder.Services.AddAutoMapper(typeof(SessionProfile));
-            builder.Services.AddAutoMapper(typeof(UserProfile));
-            builder.Services.AddAutoMapper(typeof(UserSummaryProfile));
-
             // Add services to the container.
 
             builder.Services.AddControllers();
