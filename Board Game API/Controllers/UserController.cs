@@ -30,7 +30,22 @@ namespace Board_Game_API.Controllers {
             var userDTO = _mapper.Map<UserDTO>(user);
             return Ok(userDTO);
         }
+
         //create
+        [HttpPost]
+        public async Task<ActionResult<UserDTO>> CreateUser(CreateUserDTO UserDTO) {
+            if (!ModelState.IsValid) {
+                return BadRequest(ModelState);
+            }
+
+            var user = _mapper.Map<User>(UserDTO);
+
+            _context.Users.Add(user);
+            await _context.SaveChangesAsync();
+
+            var createdUserDTO = _mapper.Map<UserDTO>(user);
+            return CreatedAtAction(nameof(GetUser), new { id = user.UserID }, createdUserDTO);
+        }
         //update
         //delete
 
