@@ -78,8 +78,7 @@ namespace Board_Game_API.Models {
                 .HasMaxLength(50);
             modelBuilder.Entity<Game>()
                 .Property(g => g.GameGenre)
-                .HasConversion<string>()
-                .HasMaxLength(50);
+                .HasConversion<int>();
             modelBuilder.Entity<Game>()
                 .Property(g => g.Complexity)
                 .HasColumnType("int");

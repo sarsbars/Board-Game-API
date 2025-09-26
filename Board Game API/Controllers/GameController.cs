@@ -42,8 +42,12 @@ namespace Board_Game_API.Controllers {
                 return BadRequest(ModelState);
             }
 
-            var game = _mapper.Map<Game>(gameDTO);
+            if (gameDTO.GameID != 0) {
+                ModelState.AddModelError("GameID", "GameID should not be specified; it is auto-generated.");
+                return BadRequest(ModelState);
+            }
 
+            var game = _mapper.Map<Game>(gameDTO);
             _context.Games.Add(game);
             await _context.SaveChangesAsync();
 
@@ -52,4 +56,3 @@ namespace Board_Game_API.Controllers {
         }
     }
 }
-
