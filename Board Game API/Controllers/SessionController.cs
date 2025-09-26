@@ -35,6 +35,17 @@ namespace Board_Game_API.Controllers {
             return Ok(sessionDTO);
         }
 
+        [HttpGet("PlayParticipants/{id}")]
+        public async Task<ActionResult<SessionDTO>> GetPlayParticipant (int id) {
+            var playParticipant = await _context.Sessions.FindAsync(id);
+            if (playParticipant == null) {
+                return NotFound();
+            }
+
+            var ppDTO = _mapper.Map<PlayParticipantDTO>(playParticipant);
+            return Ok(ppDTO);
+        }
+
         //Get participants
         [HttpGet("{id}/PlayParticipants")]
         public async Task<ActionResult<IEnumerable<PlayParticipantDTO>>> GetParticipants(int id) {
@@ -72,6 +83,32 @@ namespace Board_Game_API.Controllers {
         }
 
         //Add Participant
+        [HttpPost("/PlayParticipants")]
+        public async Task<ActionResult<PlayParticipantDTO>> AddPlayParticipant (PlayParticipantDTO ppDTO) {
+            if (!ModelState.IsValid) {
+                return BadRequest(ModelState);
+            }
+
+            var session = await _context.Sessions.FindAsync(ppDTO.SessionID);
+            var user = await _context.Users.FindAsync(ppDTO.UserID);
+            if(session == null || user == null) {
+                return NotFound();
+            }
+
+            if (ppDTO.ParticipantID != 0) {
+                ModelState.AddModelError("ParticipantID", "ParticipantID should not be specified; It is auto-generated.");
+                return BadRequest(ModelState);
+            }
+
+            var playParticipant = _mapper.Map<PlayParticipant>(ppDTO);
+            _context.PlayParticipants.Add(playParticipant);
+            await _context.SaveChangesAsync();
+
+            var createdPPDTO = _mapper.Map<PlayParticipantDTO>(playParticipant);
+            return CreatedAtAction(nameof(GetPlayParticipant), new {id = playParticipant.ParticipantID }, createdPPDTO);
+        }
+
+        
 
         //Delete
     }
