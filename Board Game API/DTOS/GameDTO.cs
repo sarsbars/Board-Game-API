@@ -1,8 +1,9 @@
-﻿using Board_Game_API.Models;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
+using Board_Game_API.Models;
 
 namespace Board_Game_API.DTOS {
     public class GameDTO {
+
         public int GameID { get; set; }
 
         [Required]
@@ -18,7 +19,7 @@ namespace Board_Game_API.DTOS {
 
         [Required]
         [EnumDataType(typeof(Game.Genre))]
-        public Game.Genre Genre { get; set; }
+        public Game.Genre GameGenre { get; set; }
 
         [Range(1, 5)]
         public int? Complexity { get; set; }

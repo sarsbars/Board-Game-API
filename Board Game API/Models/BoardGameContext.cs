@@ -78,8 +78,7 @@ namespace Board_Game_API.Models {
                 .HasMaxLength(50);
             modelBuilder.Entity<Game>()
                 .Property(g => g.GameGenre)
-                .HasConversion<string>()
-                .HasMaxLength(50);
+                .HasConversion<int>();
             modelBuilder.Entity<Game>()
                 .Property(g => g.Complexity)
                 .HasColumnType("int");
@@ -122,7 +121,7 @@ namespace Board_Game_API.Models {
                 .HasOne(p => p.User)
                 .WithMany(u => u.PlayParticipants)
                 .HasForeignKey(p => p.UserID)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.Cascade);
 
             // Seed Users
             modelBuilder.Entity<User>().HasData(

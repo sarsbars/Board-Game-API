@@ -14,7 +14,7 @@ namespace Board_Game_API.Models {
         public int GameID { get; set; }
 
         [StringLength(30)]
-        public string Condition { get; set; }
+        public string? Condition { get; set; }
 
         [Range(1, 10)]
         public int? PersonalRating { get; set; }
