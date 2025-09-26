@@ -23,6 +23,17 @@ namespace Board_Game_API.Controllers {
             return Ok(collectionDTOs);
         }
 
+        [HttpGet("{id}")]
+        public async Task<ActionResult<CollectionDTO>> GetCollection (int id) {
+            var collection = await _context.Collections.FindAsync(id);
+            if (collection == null) {
+                return NotFound();
+            }
+
+            var collectionDTO = _mapper.Map<CollectionDTO>(collection);
+            return Ok(collectionDTO);
+        }
+
         //Get CollectionGames
         [HttpGet("{id}/CollectionGames")]
         public async Task<ActionResult<List<CollectionGameDTO>>> GetCollectionGames (int id) {
@@ -39,7 +50,7 @@ namespace Board_Game_API.Controllers {
             return Ok(collectionGameDTOs);
         }
 
-        [HttpGet ("{collectionGameId}")]
+        [HttpGet ("CollectionGames/{collectionGameId}")]
         public async Task<ActionResult<CollectionGame>> GetCollectionGame(int collectionGameId) {
             var collectionGame = await _context.CollectionGames.FindAsync(collectionGameId);
             if(collectionGame == null) {
