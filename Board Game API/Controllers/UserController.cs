@@ -46,7 +46,33 @@ namespace Board_Game_API.Controllers {
             var createdUserDTO = _mapper.Map<UserDTO>(user);
             return CreatedAtAction(nameof(GetUser), new { id = user.UserID }, createdUserDTO);
         }
+
         //update
+        [HttpPut("{id}")]
+        public async Task<ActionResult<UserDTO>> UpdateUser(int id, UserDTO userDTO) {
+            if(id != userDTO.UserID) {
+                return BadRequest();
+            }
+            if (!ModelState.IsValid) {
+                return BadRequest(ModelState);
+            }
+
+            var user = _mapper.Map<User>(userDTO);
+            _context.Entry(user).State = EntityState.Modified;
+            try {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException) {
+                if (!_context.Users.Any(e => e.UserID == id)) {
+                    return NotFound();
+                }
+                else {
+                    throw;
+                }
+            }
+            return NoContent();
+        }
+
         //delete
 
 
