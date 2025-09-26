@@ -26,7 +26,17 @@ namespace Board_Game_API.Controllers {
         //Get participants
         [HttpGet("{id}/PlayParticipants")]
         public async Task<ActionResult<IEnumerable<PlayParticipantDTO>>> GetParticipants(int id) {
-            //var session
+            var session = await _context.Sessions.FindAsync(id);
+            if(session == null) {
+                return NotFound();
+            }
+
+            var playParticipants = await _context.PlayParticipants
+                .Where(p => p.SessionID == id)
+                .ToListAsync();
+
+            var playParticipantDTOs = _mapper.Map<List<PlayParticipantDTO>>(playParticipants);
+            return Ok(playParticipantDTOs);
         }
 
         //Create new
