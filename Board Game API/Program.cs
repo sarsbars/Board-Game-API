@@ -1,4 +1,4 @@
-using Board_Game_API.Mapping;
+using Board_Game_API.Profiles;
 using Microsoft.EntityFrameworkCore;
 
 namespace Board_Game_API
@@ -21,6 +21,9 @@ namespace Board_Game_API
             // Add services to the container.
 
             builder.Services.AddControllers();
+
+            builder.Services.AddAutoMapper(typeof(MappingProfile));
+            
 
             // Register DbContext with correct connection string name
             builder.Services.AddDbContext<Models.BoardGameContext>(options =>
