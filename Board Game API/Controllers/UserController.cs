@@ -15,7 +15,7 @@ namespace Board_Game_API.Controllers {
             _mapper = mapper;
         }
 
-        //get all
+        // GET: /api/User
         [HttpGet]
         public async Task<ActionResult<IEnumerable<UserDTO>>> GetUsers () {
             var users = await _context.Users.ToListAsync();
@@ -23,7 +23,7 @@ namespace Board_Game_API.Controllers {
             return Ok(userDTOs);
         }
 
-        //get one
+        // GET: /api/user/{id}
         [HttpGet("{id}")]
         public async Task<ActionResult<UserDTO>> GetUser(int id) {
             var user = await _context.Users.FindAsync(id);
@@ -35,7 +35,7 @@ namespace Board_Game_API.Controllers {
             return Ok(userDTO);
         }
 
-        //create
+        // POST: /api/User
         [HttpPost]
         public async Task<ActionResult<UserDTO>> CreateUser(UserDTO UserDTO) {
             if (!ModelState.IsValid) {
@@ -51,7 +51,7 @@ namespace Board_Game_API.Controllers {
             return CreatedAtAction(nameof(GetUser), new { id = user.UserID }, createdUserDTO);
         }
 
-        //update
+        // PUT: /api/User/{id}
         [HttpPut("{id}")]
         public async Task<ActionResult<UserDTO>> UpdateUser(int id, UserDTO userDTO) {
             if(id != userDTO.UserID) {
@@ -78,7 +78,7 @@ namespace Board_Game_API.Controllers {
             return NoContent();
         }
 
-        //delete
+        // DELETE: /api/User/{id}
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteUser (int id) {
             var user = await _context.Users.FindAsync(id);
