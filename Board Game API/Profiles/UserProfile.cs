@@ -9,7 +9,6 @@ namespace Board_Game_API.Profiles {
 
             CreateMap<User, UserDTO>().ReverseMap();
             CreateMap<User, UserSummaryDTO>().ReverseMap();
-            CreateMap<User, CreateUserDTO>().ReverseMap();
         }
     }
 }
