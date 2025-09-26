@@ -13,8 +13,14 @@ namespace Board_Game_API
 
             builder.Services.AddControllers();
 
-            builder.Services.AddAutoMapper(typeof(MappingProfile));
-            
+            builder.Services.AddAutoMapper(typeof(GameProfile));
+            builder.Services.AddAutoMapper(typeof(CollectionGameProfile));
+            builder.Services.AddAutoMapper(typeof(CollectionProfile));
+            builder.Services.AddAutoMapper(typeof(PlayParticipantProfile));
+            builder.Services.AddAutoMapper(typeof(SessionProfile));
+            builder.Services.AddAutoMapper(typeof(UserProfile));
+
+
 
             // Register DbContext with correct connection string name
             builder.Services.AddDbContext<Models.BoardGameContext>(options =>
