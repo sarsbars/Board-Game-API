@@ -57,6 +57,7 @@ namespace Board_Game_API.Controllers {
             if(id != userDTO.UserID) {
                 return BadRequest();
             }
+
             if (!ModelState.IsValid) {
                 return BadRequest(ModelState);
             }

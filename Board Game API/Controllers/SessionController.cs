@@ -108,8 +108,43 @@ namespace Board_Game_API.Controllers {
             return CreatedAtAction(nameof(GetPlayParticipant), new {id = playParticipant.ParticipantID }, createdPPDTO);
         }
 
-        
+        //Update
+        [HttpPut("{id}")]
+        public async Task<ActionResult<SessionDTO>> UpdateSession(int id, SessionDTO sessionDTO) {
+            if (id != sessionDTO.SessionID) {
+                return BadRequest();
+            }
+
+            if (!ModelState.IsValid) {
+                return BadRequest(ModelState);
+            }
+
+            var session = _mapper.Map<Session>(sessionDTO);
+            _context.Entry(session).State = EntityState.Modified;
+            try {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException) {
+                if (!_context.Sessions.Any(e => e.SessionID == id)) {
+                    return NotFound();
+                }
+                else {
+                    throw;
+                }
+            }
+            return Ok(sessionDTO);
+        }
 
         //Delete
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteUser (int id) {
+            var session = await _context.Sessions.FindAsync(id);
+            if (session == null) {
+                return NotFound();
+            }
+            _context.Sessions.Remove(session);
+            await _context.SaveChangesAsync();
+            return NoContent();
+        }
     }
 }
