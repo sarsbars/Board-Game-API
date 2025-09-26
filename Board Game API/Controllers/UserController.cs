@@ -27,13 +27,17 @@ namespace Board_Game_API.Controllers {
         [HttpGet("{id}")]
         public async Task<ActionResult<UserDTO>> GetUser(int id) {
             var user = await _context.Users.FindAsync(id);
+            if(user == null) {
+                return NotFound();
+            }
+
             var userDTO = _mapper.Map<UserDTO>(user);
             return Ok(userDTO);
         }
 
         //create
         [HttpPost]
-        public async Task<ActionResult<UserDTO>> CreateUser(CreateUserDTO UserDTO) {
+        public async Task<ActionResult<UserDTO>> CreateUser(UserDTO UserDTO) {
             if (!ModelState.IsValid) {
                 return BadRequest(ModelState);
             }
