@@ -37,7 +37,7 @@ namespace Board_Game_API.Controllers {
 
         [HttpGet("PlayParticipants/{id}")]
         public async Task<ActionResult<SessionDTO>> GetPlayParticipant (int id) {
-            var playParticipant = await _context.Sessions.FindAsync(id);
+            var playParticipant = await _context.PlayParticipants.FindAsync(id);
             if (playParticipant == null) {
                 return NotFound();
             }

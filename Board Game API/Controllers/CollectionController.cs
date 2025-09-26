@@ -50,9 +50,9 @@ namespace Board_Game_API.Controllers {
             return Ok(collectionGameDTOs);
         }
 
-        [HttpGet ("CollectionGames/{collectionGameId}")]
-        public async Task<ActionResult<CollectionGame>> GetCollectionGame(int collectionGameId) {
-            var collectionGame = await _context.CollectionGames.FindAsync(collectionGameId);
+        [HttpGet ("CollectionGames/{id}")]
+        public async Task<ActionResult<CollectionGame>> GetCollectionGame(int id) {
+            var collectionGame = await _context.CollectionGames.FindAsync(id);
             if(collectionGame == null) {
                 return NotFound();
             }
@@ -74,12 +74,17 @@ namespace Board_Game_API.Controllers {
                 return NotFound();
             }
 
+            if (cgDTO.CollectionGameID != 0) {
+                ModelState.AddModelError("CollectionGameID", "CollectionGameID should not be specified; It is auto-generated.");
+                return BadRequest(ModelState);
+            }
+
             var collectionGame = _mapper.Map<CollectionGame>(cgDTO);
             _context.CollectionGames.Add(collectionGame);
             await _context.SaveChangesAsync();
 
             var createdCollectionGameDTO = _mapper.Map<CollectionGameDTO>(collectionGame);
-            return CreatedAtAction(nameof(GetCollectionGame), new { collectionGameId = collectionGame.CollectionGameID }, createdCollectionGameDTO);
+            return CreatedAtAction(nameof(GetCollectionGame), new { id = collectionGame.CollectionGameID }, createdCollectionGameDTO);
         }
 
         //Delete Collection
