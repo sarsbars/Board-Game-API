@@ -15,7 +15,7 @@ namespace Board_Game_API.Controllers {
             _mapper = mapper;
         }
 
-        //Get all
+        // GET: api/Session
         [HttpGet]
         public async Task<ActionResult<IEnumerable<SessionDTO>>> GetSessions () {
             var sessions = await _context.Sessions.ToListAsync();
@@ -23,7 +23,7 @@ namespace Board_Game_API.Controllers {
             return Ok(sessionDTOs);
         }
 
-        //Get One
+        // GET: api/Session/{id}
         [HttpGet("{id}")]
         public async Task<ActionResult<SessionDTO>> GetSession(int id) {
             var session = await _context.Sessions.FindAsync(id);
@@ -35,6 +35,7 @@ namespace Board_Game_API.Controllers {
             return Ok(sessionDTO);
         }
 
+        // GET: /api/Session/PlayParticipants/{id}
         [HttpGet("PlayParticipants/{id}")]
         public async Task<ActionResult<SessionDTO>> GetPlayParticipant (int id) {
             var playParticipant = await _context.PlayParticipants.FindAsync(id);
@@ -46,7 +47,7 @@ namespace Board_Game_API.Controllers {
             return Ok(ppDTO);
         }
 
-        //Get participants
+        // GET: /api/Session/{id}/PlayParticipants
         [HttpGet("{id}/PlayParticipants")]
         public async Task<ActionResult<IEnumerable<PlayParticipantDTO>>> GetParticipants(int id) {
             var session = await _context.Sessions.FindAsync(id);
@@ -62,7 +63,7 @@ namespace Board_Game_API.Controllers {
             return Ok(playParticipantDTOs);
         }
 
-        //Create new
+        // POST: /api/Session
         [HttpPost]
         public async Task<ActionResult<SessionDTO>> CreateSession(SessionDTO sessionDTO) {
             if (!ModelState.IsValid) {
@@ -82,8 +83,8 @@ namespace Board_Game_API.Controllers {
             return CreatedAtAction(nameof(GetSession), new { id = session.SessionID }, createdSessionDTO);
         }
 
-        //Add Participant
-        [HttpPost("/PlayParticipants")]
+        // POST: /api/Session/PlayParticipant
+        [HttpPost("PlayParticipants")]
         public async Task<ActionResult<PlayParticipantDTO>> AddPlayParticipant (PlayParticipantDTO ppDTO) {
             if (!ModelState.IsValid) {
                 return BadRequest(ModelState);
@@ -108,7 +109,7 @@ namespace Board_Game_API.Controllers {
             return CreatedAtAction(nameof(GetPlayParticipant), new {id = playParticipant.ParticipantID }, createdPPDTO);
         }
 
-        //Update
+        // PUT: /api/Session/{id}
         [HttpPut("{id}")]
         public async Task<ActionResult<SessionDTO>> UpdateSession(int id, SessionDTO sessionDTO) {
             if (id != sessionDTO.SessionID) {
@@ -135,7 +136,7 @@ namespace Board_Game_API.Controllers {
             return Ok(sessionDTO);
         }
 
-        //Delete
+        // DELETE: /api/Session/{id}
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteUser (int id) {
             var session = await _context.Sessions.FindAsync(id);

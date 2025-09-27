@@ -15,7 +15,7 @@ namespace Board_Game_API.Controllers {
             _mapper = mapper;
         }
 
-        //Get Collections
+        // GET: /api/Collection
         [HttpGet]
         public async Task<ActionResult<IEnumerable<CollectionDTO>>> GetCollections() {
             var collections = await _context.Collections.ToListAsync();
@@ -23,6 +23,7 @@ namespace Board_Game_API.Controllers {
             return Ok(collectionDTOs);
         }
 
+        // GET: /api/Collection/{id}
         [HttpGet("{id}")]
         public async Task<ActionResult<CollectionDTO>> GetCollection (int id) {
             var collection = await _context.Collections.FindAsync(id);
@@ -34,8 +35,8 @@ namespace Board_Game_API.Controllers {
             return Ok(collectionDTO);
         }
 
-        //Get CollectionGames
-        [HttpGet("{id}/CollectionGames")]
+        // GET: /api/Collection/{id}/CollectionGame
+        [HttpGet("{id}/CollectionGame")]
         public async Task<ActionResult<List<CollectionGameDTO>>> GetCollectionGames (int id) {
             var collection = await _context.Collections.FindAsync(id);
             if (collection == null) {
@@ -50,7 +51,9 @@ namespace Board_Game_API.Controllers {
             return Ok(collectionGameDTOs);
         }
 
+
         [HttpGet ("CollectionGames/{id}")]
+
         public async Task<ActionResult<CollectionGame>> GetCollectionGame(int id) {
             var collectionGame = await _context.CollectionGames.FindAsync(id);
             if(collectionGame == null) {
@@ -61,7 +64,7 @@ namespace Board_Game_API.Controllers {
             return Ok(collectionGameDTO);
         }
 
-        //Add CollectionGame
+        // POST: /api/Collection/CollectionGame
         [HttpPost("CollectionGame")]
         public async Task<ActionResult<CollectionGameDTO>> AddCollectionGame (CollectionGameDTO cgDTO) {
             if (!ModelState.IsValid) {
@@ -87,7 +90,7 @@ namespace Board_Game_API.Controllers {
             return CreatedAtAction(nameof(GetCollectionGame), new { id = collectionGame.CollectionGameID }, createdCollectionGameDTO);
         }
 
-        //Delete Collection
+        //DELETE: /api/Collection/{id}
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteCollection (int id) {
             var collection = await _context.Collections.FindAsync(id);
